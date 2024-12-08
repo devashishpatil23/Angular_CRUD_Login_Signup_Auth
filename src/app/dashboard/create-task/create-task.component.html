@@ -1,0 +1,88 @@
+<div class="overlay">
+  <div class="popup s mx-auto mt-5">
+    <section class="container">
+      <h3 class="mb-3">{{ isEditMode ? "Update a Task" : "Create a Task" }}</h3>
+      <a class="close" (click)="OnCloseForm()" href="#">&times;</a>
+      <form #taskForm="ngForm" (ngSubmit)="OnFormSubmitted(taskForm)">
+        <div class="form-group">
+          <label for="inputTitle">Title*</label>
+          <input
+            name="title"
+            ngModel
+            type="text"
+            required
+            class="form-control"
+            id="inputTitle"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputDescription">Description </label>
+          <textarea
+            name="description"
+            ngModel
+            type="text"
+            rows="4"
+            required
+            class="form-control"
+            id="inputDescription"
+          ></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputAssignedTo">Assigned To</label>
+            <input
+              name="assignedTo"
+              ngModel
+              id="inputAssignedTo"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <div class="input-box">
+              <label>Created At</label><br />
+              <input
+                name="createdAt"
+                ngModel
+                class="p-1"
+                type="date"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <select required name="priority" ngModel class="form-control">
+              <option value="" disabled selected>Priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <select required name="status" ngModel class="form-control">
+              <option value="" disabled selected>Staus</option>
+              <option value="open">Open</option>
+              <option value="started">Started</option>
+              <option value="in-progress">In Progress</option>
+              <option value="complete">Complete</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button
+            [disabled]="taskForm.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            {{ isEditMode ? "Update Task" : "Create Task" }}
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
