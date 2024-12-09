@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from "@angular/core";
-import { HeaderComponent } from "./header/header.component";
 import { AuthService } from "./Services/auth.service";
 
 @Component({

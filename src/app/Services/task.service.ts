@@ -27,7 +27,7 @@ export class TaskService {
   logginService: LoggingService = inject(LoggingService);
   authService: AuthService = inject(AuthService);
 
-  GetAllTasks(): Observable<Task[]> {
+  GetAllTasks() {
     return this.http
       .get("https://angular-crud-28c6e-default-rtdb.firebaseio.com/tasks.json")
       .pipe(
@@ -47,22 +47,18 @@ export class TaskService {
             datatime: new Date(),
           };
           this.logginService.logError(errorObj);
-
-          // Emit the error to the errorSubject
           this.errorSubject.next(err);
-
           return throwError(() => err);
         })
       );
   }
 
   CreateTask(task: Task) {
-    const header = new HttpHeaders({ "my-header": "hello" });
+    
     this.http
       .post<{ name: string }>(
         "https://angular-crud-28c6e-default-rtdb.firebaseio.com/tasks.json",
-        task,
-        { headers: header }
+        task
       )
       .pipe(
         catchError((err) => {
@@ -153,7 +149,7 @@ export class TaskService {
   DeleteAllTasks() {
     this.http
       .delete(
-        "https://angular-crud-28c6e-default-rtdb.firebaseio.com/tasks.json"
+        "https://asngular-crud-28c6e-default-rtdb.firebaseio.com/tasks.json"
       )
       .pipe(
         catchError((err) => {

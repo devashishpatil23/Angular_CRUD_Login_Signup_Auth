@@ -51,7 +51,6 @@ export class AuthService {
 
   autoLoggin() {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
     if (!user) {
       return;
     }
@@ -63,7 +62,8 @@ export class AuthService {
     );
     if (loggedUser.token) {
       this.user.next(loggedUser);
-      const timerValue = user._expiresIn - new Date().getTime();
+      const timerValue =
+        new Date(user._expiresIn).getTime() - new Date().getTime();
       this.autoLogout(timerValue);
     }
   }
@@ -85,12 +85,8 @@ export class AuthService {
   }
 
   private handelCreateUser(res) {
-    // console.log(res.expiresIn);
-    // console.log(new Date().getTime());
-    const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
-    // console.log(expiresInTs);
+    const expiresInTs = new Date().getTime() + res.expiresIn * 1000;
     const expiresIn = new Date(expiresInTs);
-    // console.log(expiresIn);
     const user = new User(res.email, res.localId, res.idToken, expiresIn);
     this.autoLogout(res.expiresIn * 1000);
     localStorage.setItem("user", JSON.stringify(user));
@@ -98,7 +94,6 @@ export class AuthService {
   }
 
   private handleError(err) {
-    console.log(err);
     let errorMessage = "An unknow error as occured";
     if (!err.error || !err.error.error) {
       return throwError(() => errorMessage);
