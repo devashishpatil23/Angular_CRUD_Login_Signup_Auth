@@ -38,7 +38,7 @@ export class TaskService {
               tasks.push({ ...response[key], id: key });
             }
           }
-          return tasks;
+          return tasks; 
         }),
         catchError((err) => {
           const errorObj = {
@@ -149,7 +149,7 @@ export class TaskService {
   DeleteAllTasks() {
     this.http
       .delete(
-        "https://asngular-crud-28c6e-default-rtdb.firebaseio.com/tasks.json"
+        "https://angular-crud-28c6e-default-rtdb.firebaseio.com/tasks.json"
       )
       .pipe(
         catchError((err) => {

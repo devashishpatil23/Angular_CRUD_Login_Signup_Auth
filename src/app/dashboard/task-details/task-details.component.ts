@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, inject, Input, Output } from "@angular/core";
+
 import { Task } from "src/app/Models/Task";
 
 @Component({
@@ -8,6 +9,7 @@ import { Task } from "src/app/Models/Task";
   standalone: false,
 })
 export class TaskDetailsComponent {
+  
   @Input() task: Task;
   @Output()
   CloseDetailView: EventEmitter<boolean> = new EventEmitter<boolean>();

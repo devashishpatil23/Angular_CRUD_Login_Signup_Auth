@@ -1,0 +1,44 @@
+.card-icons button {
+    border: none;
+    background: none;
+  }
+  
+  .card-icons button i {
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  
+  
+  .card {
+    position: initial !important;
+  }
+  
+  .card.border-low {
+    border-top: 5px solid rgb(255, 220, 67);
+  }
+  
+  .card.border-medium {
+    border-top: 5px solid rgb(27, 183, 255);
+  }
+  
+  .card.border-high {
+    border-top: 5px solid rgb(9, 186, 0);
+  }
+  
+  .card.border-critical {
+    border-top: 5px solid rgb(255, 0, 0);
+  }
+  
+  .spinner-wraper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .snack-bar {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+  }

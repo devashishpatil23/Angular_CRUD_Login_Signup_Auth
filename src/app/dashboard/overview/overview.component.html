@@ -1,0 +1,76 @@
+
+<app-create-task
+  *ngIf="showCreateTaskForm"
+  (CloseForm)="CloseCreateTaskForm()"
+  (EmitTaskData)="CreateOrUpdateTask($event)"
+  [isEditMode]="editMode"
+  [selectedTask]="selectedTask"
+></app-create-task>
+
+<app-task-details
+  [task]="taskToShow"
+  *ngIf="showTaskDetails"
+  (CloseDetailView)="CloseTaskDetails()"
+></app-task-details>
+
+<div class="p-3">
+  <app-snackbar
+    *ngIf="errorMessage"
+    [errorMessage]="errorMessage"
+  ></app-snackbar>
+  <div class="d-md-flex justify-content-between border-bottom pb-2">
+    <h2 class="mb-2 mb-lg-0">Dashboard</h2>
+
+    <div>
+      <button class="btn btn-primary" (click)="OpenCreateTaskForm()">
+        Create Task
+      </button>
+      <button (click)="DeleteAllTask()" class="btn btn-primary ml-3">
+        Clear Tasks
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="mt-4 dashboard d-flex flex-wrap justify-content-center justify-content-md-start"
+  >
+    <app-loader class="spinner-wraper" *ngIf="isLoading"></app-loader>
+    <div *ngIf="allTasks.length <= 0 && !isLoading">
+      <h3 class="text-muted">No task...Please create a task!</h3>
+    </div>
+    <div
+      *ngFor="let task of allTasks"
+      class="card mx-3 my-4"
+      style="width: 18rem"
+      [ngClass]="'border-' + task.priority"
+    >
+      <div class="card-body">
+        <div class="task-title border-bottom mb-4">
+          <h3>{{ task.title }}</h3>
+        </div>
+        <p class="mb-"><b>Assigned to: </b>{{ task.assignedTo }}</p>
+        <p class="mb-"><b>Priority: </b>{{ task.priority }}</p>
+        <p class="mb-"><b>Status: </b>{{ task.status }}</p>
+        <div class="d-flex justify-content-end card-icons mt-4">
+          <button
+            (click)="ShowCurrentTaskDetails(task.id)"
+            class="p-2"
+            title="Detail"
+          >
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+          </button>
+          <button
+            (click)="OnEditTaskClicked(task.id)"
+            class="p-1 mx-1"
+            title="Edit"
+          >
+            <i class="fa fa-pencil-square-o text-dark" aria-hidden="true"></i>
+          </button>
+          <button (click)="DeleteTask(task.id)" class="p-2" title="Delete">
+            <i class="fa fa-trash text-dark" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
