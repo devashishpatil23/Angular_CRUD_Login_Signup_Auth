@@ -2,3 +2,6 @@
 # misc
 /.angular/cache
 /node_modules
+/dist
+/.firebase
+
